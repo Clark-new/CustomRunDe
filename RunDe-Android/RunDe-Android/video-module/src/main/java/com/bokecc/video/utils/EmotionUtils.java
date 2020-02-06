@@ -1,7 +1,9 @@
 
 package com.bokecc.video.utils;
 
-import android.support.v4.util.ArrayMap;
+
+
+import androidx.collection.ArrayMap;
 
 import com.bokecc.sdk.mobile.live.logging.ELog;
 import com.bokecc.video.R;

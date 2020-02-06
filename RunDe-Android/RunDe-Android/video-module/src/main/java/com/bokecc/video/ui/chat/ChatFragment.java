@@ -1,17 +1,17 @@
 package com.bokecc.video.ui.chat;
 
 import android.annotation.SuppressLint;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bokecc.sdk.mobile.live.eventbus.CCEventBus;
 import com.bokecc.sdk.mobile.live.eventbus.Subscribe;
 import com.bokecc.sdk.mobile.live.eventbus.ThreadMode;
-import com.bokecc.sdk.mobile.live.logging.ELog;
 import com.bokecc.sdk.mobile.live.pojo.ChatMessage;
 import com.bokecc.video.R;
 import com.bokecc.video.adapter.MultiItemTypeAdapter;

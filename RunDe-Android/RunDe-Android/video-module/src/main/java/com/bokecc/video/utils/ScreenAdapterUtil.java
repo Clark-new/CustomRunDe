@@ -17,17 +17,12 @@ public class ScreenAdapterUtil
 	// 判断是否是刘海屏
 	public static boolean hasNotchScreen(Activity activity)
 	{
-	    if (getInt("ro.miui.notch",activity) == 1 || // 小米刘海屏判断
-	        hasNotchAtHuawei(activity) || // 华为刘海屏判断
-	        isAndroidP(activity) != null // Android P版本刘海屏判断
-	        //TODO 各种品牌
-			) 
-	    { 
-	        return true;
-	    }
-	 	
-	    return false;
-	}
+        // Android P版本刘海屏判断
+        //TODO 各种品牌
+        return getInt("ro.miui.notch", activity) == 1 || // 小米刘海屏判断
+                hasNotchAtHuawei(activity) || // 华为刘海屏判断
+                isAndroidP(activity) != null;
+    }
 	 
 	////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -78,7 +73,7 @@ public class ScreenAdapterUtil
 	            Method getInt = SystemProperties.getMethod("getInt", paramTypes);
 	            //参数
 	            Object[] params = new Object[2];
-	            params[0] = new String(key);
+	            params[0] = key;
 	            params[1] = new Integer(0);
 	            result = (Integer) getInt.invoke(SystemProperties, params);
 	 

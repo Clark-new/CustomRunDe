@@ -229,7 +229,7 @@ public abstract class GiftFragment extends KeyBoardFragment {
         }
 
         ImageView giftImageView = giftView.findViewById(R.id.id_gift_img);
-        Glide.with(this).load(tag.imageUrl).into(giftImageView);
+        Glide.with(getActivity()).load(tag.imageUrl).into(giftImageView);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.topMargin = giftViewTopMargin;
         giftView.setLayoutParams(lp);

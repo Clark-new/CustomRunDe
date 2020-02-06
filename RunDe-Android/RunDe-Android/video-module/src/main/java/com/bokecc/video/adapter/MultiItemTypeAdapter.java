@@ -1,9 +1,10 @@
 package com.bokecc.video.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bokecc.video.adapter.base.ItemViewDelegate;
 import com.bokecc.video.adapter.base.ItemViewDelegateManager;

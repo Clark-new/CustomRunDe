@@ -3,11 +3,13 @@ package com.bokecc.video.ui.main.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bokecc.sdk.mobile.live.eventbus.CCEventBus;
 import com.bokecc.sdk.mobile.live.eventbus.Subscribe;
@@ -122,6 +124,7 @@ public class VideoCourseActivity extends ClickActionActivity {
         if (msg.getCode() == QuestionnaireMsg.QUESTION) {
             mQuestionnaire.setQuestionInfo((QuestionnaireInfo) msg.extra);
             mQuestionnaire.setAnswerFlag(false);
+
             mQuestionnaire.show(getSupportFragmentManager(), "questionnaire");
         } else if (msg.getCode() == QuestionnaireMsg.ANSWER) {
             mQuestionnaire.setQuestionInfo((QuestionnaireInfo) msg.extra);

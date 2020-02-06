@@ -193,7 +193,7 @@ public final class ViewfinderView extends View {
             String text = getResources().getString(R.string.scan_text);
             float textWidth = paint.measureText(text);  
               
-            canvas.drawText(text, (width - textWidth)/2, (float) (frame.bottom + (float)TEXT_PADDING_TOP * density), paint);
+            canvas.drawText(text, (width - textWidth)/2, frame.bottom + (float)TEXT_PADDING_TOP * density, paint);
 			
 			
 

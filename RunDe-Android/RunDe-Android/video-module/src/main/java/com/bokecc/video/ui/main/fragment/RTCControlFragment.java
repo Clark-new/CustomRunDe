@@ -3,9 +3,11 @@ package com.bokecc.video.ui.main.fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
 import android.view.View;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bokecc.video.controller.RtcControlCallback;
 import com.bokecc.video.video.RTCController;

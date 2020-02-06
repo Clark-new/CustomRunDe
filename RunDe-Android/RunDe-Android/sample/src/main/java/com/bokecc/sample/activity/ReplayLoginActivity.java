@@ -280,7 +280,7 @@ public class ReplayLoginActivity extends BaseActivity implements View.OnClickLis
     // 解析扫码获取到的URL
     private Map<String, String> parseUrl(String url) {
         Map<String, String> map = new HashMap<String, String>();
-        String param = url.substring(url.indexOf("?") + 1, url.length());
+        String param = url.substring(url.indexOf("?") + 1);
         String[] params = param.split("&");
 
         if (params.length < 2) {

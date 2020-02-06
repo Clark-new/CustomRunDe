@@ -21,8 +21,7 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
 import android.text.TextUtils;
 import android.view.Display;
 import android.view.SurfaceHolder;
@@ -35,6 +34,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bokecc.sample.R;
 import com.bokecc.sample.scan.zxing.camera.CameraManager;
@@ -87,18 +89,18 @@ public class MipcaActivityCapture extends Activity implements Callback , View.On
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_capture);
 		CameraManager.init(getApplication());
-		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+		viewfinderView = findViewById(R.id.viewfinder_view);
 		
-		ImageView tvBack = (ImageView) findViewById(R.id.iv_back);
+		ImageView tvBack = findViewById(R.id.iv_back);
 		tvBack.setOnClickListener(this);
 
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 		
-		TextView tvPhoto = (TextView) findViewById(R.id.tv_photo);
+		TextView tvPhoto = findViewById(R.id.tv_photo);
 		tvPhoto.setOnClickListener(this);
 
-		//检查权限
+//		//检查权限
 		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
 				|| ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA,
@@ -262,7 +264,7 @@ public class MipcaActivityCapture extends Activity implements Callback , View.On
 	@Override
 	protected void onResume() {
 		super.onResume();
-		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+		SurfaceView surfaceView = findViewById(R.id.preview_view);
 
 		WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 		Display display = windowManager.getDefaultDisplay();

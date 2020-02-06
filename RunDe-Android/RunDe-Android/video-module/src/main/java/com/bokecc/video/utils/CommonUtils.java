@@ -6,13 +6,13 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.annotation.RequiresApi;
+
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
-import android.view.Window;
+
 import android.view.WindowManager;
 
 import com.bokecc.sdk.mobile.live.logging.ELog;
@@ -225,11 +225,7 @@ public class CommonUtils {
             return false;
         }
         int visible = view.getVisibility();
-        if (visible == View.GONE || visible == View.INVISIBLE) {
-            return false;
-        } else {
-            return true;
-        }
+        return visible != View.GONE && visible != View.INVISIBLE;
     }
 
     /**

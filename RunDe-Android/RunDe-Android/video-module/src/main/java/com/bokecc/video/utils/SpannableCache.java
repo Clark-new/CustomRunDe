@@ -11,7 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
+
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -19,6 +19,8 @@ import android.text.style.BackgroundColorSpan;
 import android.text.style.ImageSpan;
 import android.util.LruCache;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.bokecc.video.R;
 import com.bokecc.video.route.GiftMsg;

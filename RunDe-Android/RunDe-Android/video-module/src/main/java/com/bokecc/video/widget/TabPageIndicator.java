@@ -10,8 +10,6 @@ import android.graphics.Paint.Style;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -21,6 +19,8 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.bokecc.video.R;
 import com.bokecc.video.ui.chat.InputState;
@@ -40,7 +40,7 @@ public class TabPageIndicator extends HorizontalScrollView {
     private LinearLayout.LayoutParams weightTabLayoutParams;
 
     private final PageListener pageListener = new PageListener();
-    public OnPageChangeListener delegatePageListener;
+    public ViewPager.OnPageChangeListener delegatePageListener;
 
     private LinearLayout tabsContainer;
     private ViewPager pager;
@@ -239,7 +239,7 @@ public class TabPageIndicator extends HorizontalScrollView {
         notifyDataSetChanged();
     }
 
-    public void setOnPageChangeListener(OnPageChangeListener listener) {
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
         this.delegatePageListener = listener;
     }
 
@@ -458,7 +458,7 @@ public class TabPageIndicator extends HorizontalScrollView {
         }
     }
 
-    private class PageListener implements OnPageChangeListener {
+    private class PageListener implements ViewPager.OnPageChangeListener {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
