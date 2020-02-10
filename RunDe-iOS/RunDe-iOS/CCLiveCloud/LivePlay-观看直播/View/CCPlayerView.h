@@ -102,6 +102,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UIImageView              *connectingImage;//连麦中提示信息
 @property(nonatomic,copy) void(^setRemoteView)(CGRect frame);//设置连麦视图回调
 @property(nonatomic,copy) void(^connectSpeak)(BOOL connect);//是否断开连麦
+@property (nonatomic, strong)UIButton                   *pauseButton;//底部暂停播放
+@property (nonatomic, strong)UIButton                   *centerButton;//屏幕中间暂停播放
 //#endif
 
 

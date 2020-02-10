@@ -12,6 +12,8 @@
 #import "CCAlertView.h"//提示框
 #import "CCProxy.h"
 
+
+
 #import <AVFoundation/AVFoundation.h>
 @interface CCPlayBack ()<RequestDataPlayBackDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong)NSTimer                    * playerTimer;//隐藏导航定时器
@@ -45,7 +47,7 @@
         _playBackRate = 1.0;//初始化回放速率
 //        _isSmallDocView = isSmallDocView;//是否是文档小窗
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-         _pauseInBackGround = YES;
+         _pauseInBackGround = NO;
          _isSmallDocView = YES;
         [self setupUI];
         [self addObserver];//添加通知
@@ -196,6 +198,11 @@
 //            if(![self.playerView.timer isValid]) {
 
 //                NSLog(@"__test 重新开始播放视频, slider.value = %f", _playerView.slider.value);
+                //#ifdef LockView
+                                if (_pauseInBackGround == NO) {//后台支持播放
+                                    [self setLockView];//设置锁屏界面
+                                }
+                //#endif
                 [self removeLoadingView];//移除加载视图
                 /*      保存日志     */
                 [[SaveLogUtil sharedInstance] saveLog:@"" action:SAVELOG_ALERT];
@@ -238,6 +245,41 @@
         }
     }
 }
+//#ifdef LockView
+/**
+ 设置锁屏播放器界面
+ */
+-(void)setLockView{
+    if (_lockView) {//如果当前已经初始化，return;
+        
+        return;
+    }
+    _lockView = [[CCLockView alloc] initWithRoomName:_roomName duration:_requestDataPlayBack.ijkPlayer.duration];
+//    [self addSubview:_lockView];
+    [[UIApplication sharedApplication].keyWindow addSubview:_lockView];
+    [_requestDataPlayBack.ijkPlayer setPauseInBackground:self.pauseInBackGround];
+    WS(weakSelf)
+    /*     播放/暂停回调     */
+    _lockView.pauseCallBack = ^(BOOL pause) {
+        weakSelf.pauseButton.selected = pause;
+        weakSelf.centerButton.selected = pause;
+        if (pause) {
+            [weakSelf stopTimer];
+            [weakSelf.requestDataPlayBack.ijkPlayer pause];
+        }else{
+            [weakSelf startTimer];
+            [weakSelf.requestDataPlayBack.ijkPlayer play];
+        }
+    };
+    /*     快进/快退回调     */
+    _lockView.progressBlock = ^(int time) {
+//        NSLog(@"---playBack快进/快退至%d秒", time);
+        weakSelf.requestDataPlayBack.currentPlaybackTime = time;
+        weakSelf.slider.value = time;
+        weakSelf.sliderValue = weakSelf.slider.value;
+    };
+}
+//#endif
 - (void)playBackRequestCancel {
     [self stopTimer];
     [self stopPlayerTimer];
@@ -301,6 +343,13 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _enterBackGround = NO;
     });
+    //#ifdef LockView
+        /*  当视频播放被打断时，重新加载视频  */
+        if (!self.requestDataPlayBack.ijkPlayer.playbackState) {
+            [self.requestDataPlayBack replayPlayer];
+            [self.lockView updateLockView];
+        }
+    //#endif
     if (self.pauseButton.selected == NO) {
         [self startTimer];
     }
@@ -331,6 +380,9 @@
         [_requestDataPlayBack replayPlayer];
         [self stopTimer];
         [self showLoadingView];
+        //#ifdef LockView
+                [_lockView updateLockView];
+        //#endif
 //        NSLog(@"__test 视频被打断，重新播放视频");
 //        NSLog(@"__test 当前的播放时间为:%f", _playerView.slider.value);
     }
@@ -385,6 +437,10 @@
     //滑块完成回调
 //    self.sliderCallBack(duration);
     weakSelf.requestDataPlayBack.currentPlaybackTime = duration;
+    //#ifdef LockView
+            /*  校对锁屏播放器进度 */
+            [weakSelf.lockView updateCurrentDurtion:weakSelf.requestDataPlayBack.currentPlaybackTime];
+    //#endif
     if (weakSelf.requestDataPlayBack.ijkPlayer.playbackState != IJKMPMoviePlaybackStatePlaying) {
         [weakSelf.requestDataPlayBack startPlayer];
         [weakSelf startTimer];
@@ -760,12 +816,15 @@
  @param sender sender
  */
 - (void)quanpingButtonClick:(UIButton *)sender {
+
+    
     UIView *view = [self superview];
     if (!sender.selected) {
         sender.selected = YES;
         sender.tag = 2;
         self.backButton.tag = 2;
 //        [self turnRight];
+
         self.changePlayBack(1);
 #warning 需要处理全屏
         if (self.delegate) {
@@ -867,9 +926,9 @@
     WS(weakSelf)
 //    NSLog(@"退出直播回放");
     if (self.exitCallBack) {
-        self.exitCallBack();//退出回放回调
         [weakSelf.requestDataPlayBack requestCancel];
         weakSelf.requestDataPlayBack = nil;
+        self.exitCallBack();//退出回放回调
     }
 }
 #pragma mark - 播放和根据时间添加数据
@@ -883,6 +942,8 @@
             //获取当前播放时间和视频总时长
             NSTimeInterval position = (int)round(self.requestDataPlayBack.currentPlaybackTime);
             NSTimeInterval duration = (int)round(self.requestDataPlayBack.playerDuration);
+            NSLog(@"时间是%f--%f",position,duration);
+            
             //存在播放器最后一点不播放的情况，所以把进度条的数据对到和最后一秒想同就可以了
             if(duration - position == 1 && (self.sliderValue == position || self.sliderValue == duration)) {
                 position = duration;
@@ -910,6 +971,10 @@
             //校对本地显示速率和播放器播放速率
             if(self.requestDataPlayBack.ijkPlayer.playbackRate != self.playBackRate) {
                 self.requestDataPlayBack.ijkPlayer.playbackRate = self.playBackRate;
+                //#ifdef LockView
+                           //校对锁屏播放器播放速率
+                           [_lockView updatePlayBackRate:self.requestDataPlayBack.ijkPlayer.playbackRate];
+                           //#endif
                 [self startTimer];
             }
             if(self.pauseButton.selected == NO && self.requestDataPlayBack.ijkPlayer.playbackState == IJKMPMoviePlaybackStatePaused) {
@@ -920,6 +985,10 @@
             [self.requestDataPlayBack continueFromTheTime:self.sliderValue];
             //更新左侧label
             self.leftTimeLabel.text = [NSString stringWithFormat:@"%02d:%02d", (int)(self.sliderValue / 60), (int)(self.sliderValue) % 60];
+            //#ifdef LockView
+            /*  校对锁屏播放器进度 */
+            [_lockView updateCurrentDurtion:_requestDataPlayBack.currentPlaybackTime];
+            //#endif
         });
 }
 //开始播放

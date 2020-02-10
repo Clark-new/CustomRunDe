@@ -37,7 +37,6 @@
         [self.timer invalidate];
         self.timer = nil;
     }
-    
 }
 
 #pragma mark - action
@@ -46,7 +45,7 @@
 //    button.selected = !button.selected;
     self.selectButton.selected = !self.selectButton.selected;
     if (self.didSelect) {
-        self.didSelect(button.selected);
+        self.didSelect(self.selectButton.selected);
     }
 }
 

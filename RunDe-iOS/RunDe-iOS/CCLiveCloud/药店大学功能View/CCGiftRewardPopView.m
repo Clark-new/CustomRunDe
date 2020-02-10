@@ -126,7 +126,9 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.frame = CGRectMake(-self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
-        [self.array removeObjectAtIndex:0];
+        if (self.array.count >0) {
+            [self.array removeObjectAtIndex:0];
+        }
         self.hidden = YES;
         if (self.array.count != 0) {
             [self beginAnimate];
@@ -136,6 +138,9 @@
 
 -(void)stopAnimate
 {
+    [self.layer removeAllAnimations];
+    self.hidden = YES;
+    
     @synchronized (self) {
         [self.array removeAllObjects];
     }

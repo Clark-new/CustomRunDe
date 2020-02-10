@@ -34,9 +34,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-//        self.backgroundColor = CCClearColor;
+        //        self.backgroundColor = CCClearColor;
         self.backgroundColor = [UIColor colorWithLight:[UIColor whiteColor] Dark:[UIColor blackColor]];
-
+        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setUpUI];
     }
@@ -96,10 +96,10 @@
 -(void)setCallMdeol:(CCPublicChatModel *)model indexPath:(NSIndexPath *)indexPath
 {
     BOOL fromSelf = [model.fromuserid isEqualToString:model.myViwerId];//判断是否是自己发的
-
+    
     //设置头像视图
     [self dealHeadBtnWithModel:model isInput:fromSelf indexPath:indexPath];
-
+    
     //设置聊天内容
     _contentLabel.attributedText = [self getCallAttributedWithModel:model];
     
@@ -108,55 +108,55 @@
     //计算气泡的宽度和高度
     height = model.textSize.height + CCGetRealFromPt(18) * 2;
     width = model.textSize.width ;
-   if (fromSelf) {
-          if (height < CCGetRealFromPt(80)) {
-              [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                  make.right.mas_equalTo(self.headBtn.mas_left);
-                  make.centerY.mas_equalTo(self.headBtn);
-                  make.size.mas_equalTo(CGSizeMake(35, CCGetRealFromPt(80)));
-              }];
-          }else{
-              [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-              make.right.mas_equalTo(self.headBtn.mas_left).offset(-10);
-              make.top.mas_equalTo(self.headBtn);
-              make.size.mas_equalTo(CGSizeMake(width-30, height));
-              }];
-              [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                  make.left.right.equalTo(_bgBtn);
-                  make.centerY.mas_equalTo(self.bgBtn).offset(-5);
-              }];
-          }
-       [self.bgBtn layoutIfNeeded];
-       //设置Label的约束
-       [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-           make.left.mas_equalTo(self.bgBtn).offset(5);
-           make.centerY.mas_equalTo(self.bgBtn);
-           make.size.mas_equalTo(CGSizeMake(model.textSize.width + 1, model.textSize.height + 1 + 4));
-       }];
-      }else{
-          if(height < CCGetRealFromPt(80)) {//计算高度
-                    [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                        make.left.mas_equalTo(self.headBtn.mas_right);
-                        make.centerY.mas_equalTo(self.headBtn);
-                        make.size.mas_equalTo(CGSizeMake(width, CCGetRealFromPt(80)));
-                    }];
-                } else {
-                    height = model.textSize.height + CCGetRealFromPt(18) * 2;
-                    [self.bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                         make.left.mas_equalTo(self.headBtn.mas_right);
-                        make.top.mas_equalTo(self.headBtn);
-                        make.size.mas_equalTo(CGSizeMake(width, height));
-                    }];
-                };
-          [self.bgBtn layoutIfNeeded];
-          //设置Label的约束
-          [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-              make.left.mas_equalTo(self.bgBtn).offset(5);
-              make.centerY.mas_equalTo(self.bgBtn).offset(-1);
-              make.size.mas_equalTo(CGSizeMake(model.textSize.width + 1, model.textSize.height + 1 + 4));
-          }];
-      }
-
+    if (fromSelf) {
+        if (height < CCGetRealFromPt(80)) {
+            [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(self.headBtn.mas_left);
+                make.centerY.mas_equalTo(self.headBtn);
+                make.size.mas_equalTo(CGSizeMake(35, CCGetRealFromPt(80)));
+            }];
+        }else{
+            [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(self.headBtn.mas_left).offset(-10);
+                make.top.mas_equalTo(self.headBtn);
+                make.size.mas_equalTo(CGSizeMake(width-30, height));
+            }];
+            [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(_bgBtn);
+                make.centerY.mas_equalTo(self.bgBtn).offset(-5);
+            }];
+        }
+        [self.bgBtn layoutIfNeeded];
+        //设置Label的约束
+        [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.bgBtn).offset(5);
+            make.centerY.mas_equalTo(self.bgBtn);
+            make.size.mas_equalTo(CGSizeMake(model.textSize.width + 1, model.textSize.height + 1 + 4));
+        }];
+    }else{
+        if(height < CCGetRealFromPt(80)) {//计算高度
+            [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.headBtn.mas_right);
+                make.centerY.mas_equalTo(self.headBtn);
+                make.size.mas_equalTo(CGSizeMake(width, CCGetRealFromPt(80)));
+            }];
+        } else {
+            height = model.textSize.height + CCGetRealFromPt(18) * 2;
+            [self.bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.headBtn.mas_right);
+                make.top.mas_equalTo(self.headBtn);
+                make.size.mas_equalTo(CGSizeMake(width, height));
+            }];
+        };
+        [self.bgBtn layoutIfNeeded];
+        //设置Label的约束
+        [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.bgBtn).offset(5);
+            make.centerY.mas_equalTo(self.bgBtn).offset(-1);
+            make.size.mas_equalTo(CGSizeMake(model.textSize.width + 1, model.textSize.height + 1 + 4));
+        }];
+    }
+    
     _contentLabel.textAlignment = NSTextAlignmentLeft;
 }
 
@@ -164,44 +164,44 @@
 -(void)setRewardModel:(CCPublicChatModel *)model indexPath:(NSIndexPath *)indexPath
 {
     BOOL fromSelf = [model.fromuserid isEqualToString:model.myViwerId];//判断是否是自己发的
-
+    
     //设置头像视图
     [self dealHeadBtnWithModel:model isInput:YES indexPath:indexPath];
-
+    
     //设置聊天内容
     _contentLabel.attributedText = [self getRewardAttributedWithModel:model];
     
     CGFloat height = 0;//计算气泡的高度
-       CGFloat width = 0;//计算气泡的宽度
-       //计算气泡的宽度和高度
-       height = 55;
-       width = 200;
-     if (fromSelf) {
- 
-                [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                  make.right.mas_equalTo(self.headBtn.mas_left).offset(-10);
-                  make.centerY.mas_equalTo(self.headBtn);
-                  make.size.mas_equalTo(CGSizeMake(width, height));
-                  }];
-                [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.left.top.bottom.right.equalTo(_bgBtn);
-                }];
-
-         _contentLabel.textAlignment = NSTextAlignmentRight;
-
-        }else{
-                      [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                          make.left.mas_equalTo(self.headBtn.mas_right).offset(5);
-                          make.centerY.mas_equalTo(self.headBtn);
-                          make.size.mas_equalTo(CGSizeMake(width+40, height));
-                      }];
-            //设置Label的约束
-            [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.top.bottom.right.equalTo(_bgBtn);
-            }];
-            _contentLabel.textAlignment = NSTextAlignmentLeft;
-        }
-       [self.bgBtn layoutIfNeeded];
+    CGFloat width = 0;//计算气泡的宽度
+    //计算气泡的宽度和高度
+    height = 55;
+    width = 200;
+    if (fromSelf) {
+        
+        [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(self.headBtn.mas_left).offset(-10);
+            make.centerY.mas_equalTo(self.headBtn);
+            make.size.mas_equalTo(CGSizeMake(width, height));
+        }];
+        [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.bottom.right.equalTo(_bgBtn);
+        }];
+        
+        _contentLabel.textAlignment = NSTextAlignmentRight;
+        
+    }else{
+        [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.headBtn.mas_right).offset(5);
+            make.centerY.mas_equalTo(self.headBtn);
+            make.size.mas_equalTo(CGSizeMake(width+40, height));
+        }];
+        //设置Label的约束
+        [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.bottom.right.equalTo(_bgBtn);
+        }];
+        _contentLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    [self.bgBtn layoutIfNeeded];
 }
 -(CGFloat)getTextCellHeightWith:(CCPublicChatModel *)model{
     CGFloat height;
@@ -237,114 +237,134 @@
 -(void)setNormalTextModel:(CCPublicChatModel *)model isInput:(BOOL)input indexPath:(NSIndexPath *)indexPath
 {
     BOOL fromSelf = [model.fromuserid isEqualToString:model.myViwerId];//判断是否是自己发的
-
+    
     //设置头像视图
     [self dealHeadBtnWithModel:model isInput:fromSelf indexPath:indexPath];
     
     //设置聊天内容
     _contentLabel.attributedText = [self getTextAttributedWithModel:model];
     
-       CGFloat height = 0;//计算气泡的高度
-       CGFloat width = 0;//计算气泡的宽度
-       //计算气泡的宽度和高度
-       height = model.textSize.height + CCGetRealFromPt(18) * 2 - 10;
-       width = model.textSize.width + CCGetRealFromPt(30) + CCGetRealFromPt(20);
+    CGFloat height = 0;//计算气泡的高度
+    CGFloat width = 0;//计算气泡的宽度
+    //计算气泡的宽度和高度
+    height = model.textSize.height + CCGetRealFromPt(18) * 2 - 10;
+    width = model.textSize.width + CCGetRealFromPt(30) + CCGetRealFromPt(20);
     
     if (fromSelf) {
         WS(weakSelf)
         dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf getTextCellHeightWith:model];
-          
-        if (height < CCGetRealFromPt(80)) {
-            [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.right.mas_equalTo(self.headBtn.mas_left).offset(-5);
-                make.top.mas_equalTo(self.headBtn);
-                make.size.mas_equalTo(CGSizeMake((model.noNameSize.width +10), CCGetRealFromPt(60)));
+            [weakSelf getTextCellHeightWith:model];
+            
+            if (height < CCGetRealFromPt(80)) {
+                [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.right.mas_equalTo(self.headBtn.mas_left).offset(-5);
+                    make.top.mas_equalTo(self.headBtn);
+                    make.size.mas_equalTo(CGSizeMake((model.noNameSize.width +10), CCGetRealFromPt(60)));
+                }];
+            }else{
+                [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.right.mas_equalTo(self.headBtn.mas_left).offset(-5);
+                    make.top.mas_equalTo(self.headBtn);
+                    make.size.mas_equalTo(CGSizeMake((model.noNameSize.width +10), height));
+                }];
+            }
+            [self.bgBtn layoutIfNeeded];
+            //        _contentLabel.textAlignment = NSTextAlignmentRight;
+            
+            [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(_bgBtn);
+                make.centerY.mas_equalTo(self.bgBtn).offset(-3);
             }];
-        }else{
-            [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self.headBtn.mas_left).offset(-5);
-            make.top.mas_equalTo(self.headBtn);
-            make.size.mas_equalTo(CGSizeMake((model.noNameSize.width +10), height));
-            }];
-        }
-        [self.bgBtn layoutIfNeeded];
-//        _contentLabel.textAlignment = NSTextAlignmentRight;
-        [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-               make.left.right.equalTo(_bgBtn);
-               make.centerY.mas_equalTo(self.bgBtn).offset(-3);
-           }];
         });
     }else{
-        if(height < CCGetRealFromPt(80)) {//计算高度
-                  [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                      make.left.mas_equalTo(self.headBtn.mas_right);
-                      make.top.mas_equalTo(self.headBtn);
-                      make.size.mas_equalTo(CGSizeMake(width, CCGetRealFromPt(60)));
-                  }];
-            [self.bgBtn layoutIfNeeded];
-             
-            //设置Label的约束
+     
+//        if(height < CCGetRealFromPt(80)) {//计算高度
+        if (model.textSize.height < (_contentLabel.font.lineHeight * 2 + CCGetRealFromPt(36))) {
+
+            [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.headBtn.mas_right);
+                make.top.mas_equalTo(self.headBtn);
+                make.size.mas_equalTo(CGSizeMake(width, CCGetRealFromPt(60)));
+            }];
+            //            [self.bgBtn layoutIfNeeded];
+            
             [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(self.bgBtn).offset(5);
-                make.centerY.mas_equalTo(self.bgBtn).offset(-3);
-//                make.size.mas_equalTo(CGSizeMake(model.textSize.width + 1, model.textSize.height + 1));
+//                make.top.mas_equalTo(self.bgBtn).offset(-3);
+                make.top.equalTo(@(-CCGetRealFromPt(10)));
+                make.right.equalTo(self.bgBtn);
+                make.height.equalTo(self.bgBtn);
             }];
-              } else {
-                  height = model.textSize.height + CCGetRealFromPt(18) * 2;
-                  [self.bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                       make.left.mas_equalTo(self.headBtn.mas_right);
-                      make.top.mas_equalTo(self.headBtn);
-                      make.size.mas_equalTo(CGSizeMake(width, height));
-                  }];
-                  [self.bgBtn layoutIfNeeded];
-                   
-                  //设置Label的约束
-                  [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                      make.left.mas_equalTo(self.bgBtn).offset(5);
-                      make.centerY.mas_equalTo(self.bgBtn).offset(-5);
-                      make.right.mas_equalTo(self.bgBtn);
-//                      make.size.mas_equalTo(CGSizeMake(model.textSize.width + 1, model.textSize.height + 1));
-                  }];
-              };
+            
+            //设置Label的约束
+            //            [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            //                make.left.mas_equalTo(self.bgBtn).offset(5);
+            //                make.centerY.mas_equalTo(self.bgBtn).offset(-3);
+            //                //                make.size.mas_equalTo(CGSizeMake(model.textSize.width + 1, model.textSize.height + 1));
+            //            }];
+        } else {
+            height = model.textSize.height + CCGetRealFromPt(18) * 2;
+            [self.bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.headBtn.mas_right);
+                make.top.mas_equalTo(self.headBtn);
+                make.size.mas_equalTo(CGSizeMake(width, height));
+            }];
+            [self.bgBtn layoutIfNeeded];
+            
+            [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.bgBtn).offset(5);
+//                make.centerY.mas_equalTo(self.bgBtn).offset(-5);
+                make.top.equalTo(@(-CCGetRealFromPt(15)));
+                make.right.equalTo(self.bgBtn);
+                make.height.equalTo(self.bgBtn);
+            }];
+            
+            //设置Label的约束
+            //            [_contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            //                make.left.mas_equalTo(self.bgBtn).offset(5);
+            //                make.centerY.mas_equalTo(self.bgBtn).offset(-5);
+            //                make.right.mas_equalTo(self.bgBtn);
+            //                //                      make.size.mas_equalTo(CGSizeMake(model.textSize.width + 1, model.textSize.height + 1));
+            //            }];
+        };
     }
     
     /*
-       if(height < CCGetRealFromPt(80)) {//计算高度
-           [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-               make.left.mas_equalTo(self.headBtn.mas_right).offset(CCGetRealFromPt(22));
-               make.top.mas_equalTo(self.headBtn);
-               make.size.mas_equalTo(CGSizeMake(width, CCGetRealFromPt(80)));
-           }];
-       } else {
-           height = model.textSize.height + CCGetRealFromPt(18) * 2;
-           [self.bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(self.headBtn.mas_right).offset(CCGetRealFromPt(22));
-               make.top.mas_equalTo(self.headBtn);
-               make.size.mas_equalTo(CGSizeMake(width, height));
-           }];
-       };
+     if(height < CCGetRealFromPt(80)) {//计算高度
+     [_bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+     make.left.mas_equalTo(self.headBtn.mas_right).offset(CCGetRealFromPt(22));
+     make.top.mas_equalTo(self.headBtn);
+     make.size.mas_equalTo(CGSizeMake(width, CCGetRealFromPt(80)));
+     }];
+     } else {
+     height = model.textSize.height + CCGetRealFromPt(18) * 2;
+     [self.bgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+     make.left.mas_equalTo(self.headBtn.mas_right).offset(CCGetRealFromPt(22));
+     make.top.mas_equalTo(self.headBtn);
+     make.size.mas_equalTo(CGSizeMake(width, height));
+     }];
+     };
      */
     
-
-       NSString *str = model.msg;
-
-
-       if([self isURL:str]) {
-           self.URL = str;
-       } else {
-           self.urlArr = [self getURLFromStr:str];
-           if (self.urlArr.count >0) {
-               self.URL = self.urlArr[0];
-           }
-       }
-       if (self.URL.length >0) {
-           //点击打开
-           _contentLabel.userInteractionEnabled = YES;
-           UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
-           [_contentLabel addGestureRecognizer:labelTapGestureRecognizer];
-       }
-//       [self dealWithBtn:self.bgBtn];
+    
+    NSString *str = model.msg;
+    
+    
+    if([self isURL:str]) {
+        self.URL = str;
+    } else {
+        self.urlArr = [self getURLFromStr:str];
+        if (self.urlArr.count >0) {
+            self.URL = self.urlArr[0];
+        }
+    }
+    if (self.URL.length >0) {
+        //点击打开
+        _contentLabel.userInteractionEnabled = YES;
+        UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
+        [_contentLabel addGestureRecognizer:labelTapGestureRecognizer];
+    }
+    //       [self dealWithBtn:self.bgBtn];
 }
 
 //扣1 扣2
@@ -373,20 +393,20 @@
         imageName = @"live_call_two.png";
     }
     
-//    NSMutableAttributedString * textAttr = [Utility exchangeString:callText withText:content imageName:imageName];
+    //    NSMutableAttributedString * textAttr = [Utility exchangeString:callText withText:content imageName:imageName];
     NSMutableAttributedString * textAttr = [Utility exchangeString:callText withText:content imageName:imageName RefreshCell:nil];
-
+    
     [textAttr addAttribute:NSForegroundColorAttributeName value:textColor range:NSMakeRange(name.length, textAttr.length - name.length)];
     
     [textAttr addAttribute:NSForegroundColorAttributeName value:nameColor range:NSMakeRange(0, name.length)];
-
+    
     //url增加颜色
-     if (model.typeState != 2) {//如果是图片的话,过滤掉消息
-         for(NSValue *value in urlArr) {
-             NSRange range=[value rangeValue];
-             [textAttr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(range.location + name.length, range.length)];
-         }
-     }
+    if (model.typeState != 2) {//如果是图片的话,过滤掉消息
+        for(NSValue *value in urlArr) {
+            NSRange range=[value rangeValue];
+            [textAttr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(range.location + name.length, range.length)];
+        }
+    }
     
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.alignment = NSTextAlignmentLeft;
@@ -397,7 +417,7 @@
     [textAttr addAttributes:dict range:NSMakeRange(0, textAttr.length)];
     [textAttr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FontSize_28] range:NSMakeRange(0, textAttr.length)];
     [textAttr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, textAttr.length)];
-
+    
     return textAttr;
 }
 
@@ -417,43 +437,43 @@
     NSString * name = fromSelf?@"":userName;
     NSString * key;
     NSString * imageName;
-//    BOOL isGift = [model.msg containsString:SENDGIFT1] ? YES : NO;
-//    if (isGift) {
-       
-//        NSURL *url = [NSURL URLWithString:@"http://static.csslcloud.net/img/em2/15.png"];
-        NSString *result ;
-        for(NSValue *value in urlArr) {
-             NSRange range=[value rangeValue];
-            result = [model.msg substringWithRange:range];
-            break;
-         }
-//        NSLog(@"内容是%@",result);
-        imageName = result;
-        NSString * str = [NSString stringWithFormat:@"cem_%@]",result];
-        key = str;
-//    }else{
-//        key = SENDREWARD;
-//        imageName = @"live_chat_money.png";
-//    }
+    //    BOOL isGift = [model.msg containsString:SENDGIFT1] ? YES : NO;
+    //    if (isGift) {
+    
+    //        NSURL *url = [NSURL URLWithString:@"http://static.csslcloud.net/img/em2/15.png"];
+    NSString *result ;
+    for(NSValue *value in urlArr) {
+        NSRange range=[value rangeValue];
+        result = [model.msg substringWithRange:range];
+        break;
+    }
+    //        NSLog(@"内容是%@",result);
+    imageName = result;
+    NSString * str = [NSString stringWithFormat:@"cem_%@]",result];
+    key = str;
+    //    }else{
+    //        key = SENDREWARD;
+    //        imageName = @"live_chat_money.png";
+    //    }
     
     NSString * content = [NSString stringWithFormat:@"%@%@",name,model.msg];
     
-//    NSMutableAttributedString * textAttr = [Utility exchangeString:key withText:content imageName:imageName];
+    //    NSMutableAttributedString * textAttr = [Utility exchangeString:key withText:content imageName:imageName];
     NSMutableAttributedString * textAttr = [Utility exchangeString:key withText:content imageName:imageName RefreshCell:^{
         [self.tableView reloadData];
     }];
-
+    
     [textAttr addAttribute:NSForegroundColorAttributeName value:textColor range:NSMakeRange(name.length, textAttr.length - name.length)];
     
     [textAttr addAttribute:NSForegroundColorAttributeName value:nameColor range:NSMakeRange(0, name.length)];
-
+    
     //url增加颜色
-//     if (model.typeState != 2) {//如果是图片的话,过滤掉消息
-//         for(NSValue *value in urlArr) {
-//             NSRange range=[value rangeValue];
-//             [textAttr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(range.location + name.length, range.length)];
-//         }
-//     }
+    //     if (model.typeState != 2) {//如果是图片的话,过滤掉消息
+    //         for(NSValue *value in urlArr) {
+    //             NSRange range=[value rangeValue];
+    //             [textAttr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(range.location + name.length, range.length)];
+    //         }
+    //     }
     
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.alignment = NSTextAlignmentLeft;
@@ -464,7 +484,7 @@
     [textAttr addAttributes:dict range:NSMakeRange(0, textAttr.length)];
     [textAttr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FontSize_28] range:NSMakeRange(0, textAttr.length)];
     [textAttr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, textAttr.length)];
-
+    
     return textAttr;
 }
 
@@ -484,41 +504,41 @@
     NSString * name = fromSelf?@"":userName;
     NSString * content;
     if ([model.userrole isEqualToString:@"publisher"]) {
-       content = [NSString stringWithFormat:@"[em2_21]%@%@",name,model.msg];
+        content = [NSString stringWithFormat:@"[em2_21]%@%@",name,model.msg];
     } else {
         content = [NSString stringWithFormat:@"%@%@",name,model.msg];
     }
     NSMutableAttributedString * textAttr = [Utility emotionStrWithString:content y:-8];
     [textAttr addAttribute:NSForegroundColorAttributeName value:textColor range:NSMakeRange(name.length, textAttr.length - name.length)];
-       
-       [textAttr addAttribute:NSForegroundColorAttributeName value:nameColor range:NSMakeRange(0, name.length)];
-
-       //url增加颜色
-        if (model.typeState != 2) {//如果是图片的话,过滤掉消息
-            for(NSValue *value in urlArr) {
-                NSRange range=[value rangeValue];
-                [textAttr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(range.location + name.length, range.length)];
-            }
+    
+    [textAttr addAttribute:NSForegroundColorAttributeName value:nameColor range:NSMakeRange(0, name.length)];
+    
+    //url增加颜色
+    if (model.typeState != 2) {//如果是图片的话,过滤掉消息
+        for(NSValue *value in urlArr) {
+            NSRange range=[value rangeValue];
+            [textAttr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(range.location + name.length, range.length)];
         }
-       
-       NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-       style.alignment = NSTextAlignmentLeft;
-       style.minimumLineHeight = CCGetRealFromPt(36);
-       style.maximumLineHeight = CCGetRealFromPt(60);
-       style.lineBreakMode = NSLineBreakByCharWrapping;
-       NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:FontSize_28],NSParagraphStyleAttributeName:style};
-       [textAttr addAttributes:dict range:NSMakeRange(0, textAttr.length)];
-       [textAttr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FontSize_28] range:NSMakeRange(0, textAttr.length)];
-       [textAttr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, textAttr.length)];
-
-       return textAttr;
+    }
+    
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.alignment = NSTextAlignmentLeft;
+    style.minimumLineHeight = CCGetRealFromPt(36);
+    style.maximumLineHeight = CCGetRealFromPt(60);
+    style.lineBreakMode = NSLineBreakByCharWrapping;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:FontSize_28],NSParagraphStyleAttributeName:style};
+    [textAttr addAttributes:dict range:NSMakeRange(0, textAttr.length)];
+    [textAttr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:FontSize_28] range:NSMakeRange(0, textAttr.length)];
+    [textAttr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, textAttr.length)];
+    
+    return textAttr;
 }
 
 #pragma mark - 加载广播消息
 
 /**
  加载广播消息
-
+ 
  @param model 公聊数据模型
  */
 -(void)setRadioModel:(CCPublicChatModel *)model{
@@ -573,8 +593,8 @@
         make.size.mas_equalTo(CGSizeMake(model.textSize.width + 1, model.textSize.height + 1));
     }];
     NSString *str = model.msg;
-
-
+    
+    
     if([self isURL:str]) {
         self.URL = str;
     } else {
@@ -712,8 +732,8 @@
 }
 #pragma mark - 设置用户头像
 -(void)dealHeadBtnWithModel:(CCPublicChatModel *)model
-           isInput:(BOOL)input
-         indexPath:(NSIndexPath *)indexPath{
+                    isInput:(BOOL)input
+                  indexPath:(NSIndexPath *)indexPath{
     //设置头像
     BOOL fromSelf = [model.fromuserid isEqualToString:model.myViwerId];//判断是否是自己发的
     _headBtn.tag = indexPath.row;
@@ -739,7 +759,7 @@
         [_headBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self).offset(-CCGetRealFromPt(30));
             make.top.mas_equalTo(self).offset(CCGetRealFromPt(30));
-    make.size.mas_equalTo(CGSizeMake(25,25));
+            make.size.mas_equalTo(CGSizeMake(25,25));
         }];
     }else{
         [_headBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -749,11 +769,11 @@
         }];
     }
     
-//    [_headBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self).offset(CCGetRealFromPt(30));
-//        make.top.mas_equalTo(self).offset(CCGetRealFromPt(30));
-//        make.size.mas_equalTo(CGSizeMake(CCGetRealFromPt(80),CCGetRealFromPt(80)));
-//    }];
+    //    [_headBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+    //        make.left.mas_equalTo(self).offset(CCGetRealFromPt(30));
+    //        make.top.mas_equalTo(self).offset(CCGetRealFromPt(30));
+    //        make.size.mas_equalTo(CGSizeMake(CCGetRealFromPt(80),CCGetRealFromPt(80)));
+    //    }];
     [_headBtn layoutIfNeeded];
     //根据身份为头像设置身份标示
     _imageid.image = [UIImage imageNamed:model.headTag];
@@ -778,16 +798,16 @@
     style.alignment = NSTextAlignmentLeft;
     style.lineBreakMode = NSLineBreakByCharWrapping;
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:FontSize_28],NSParagraphStyleAttributeName:style};
-     [textAttri addAttributes:dict range:NSMakeRange(0, textAttri.length)];
+    [textAttri addAttributes:dict range:NSMakeRange(0, textAttri.length)];
     [textAttri addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#999999" alpha:1.0f] range:NSMakeRange(0, textAttri.length)];
-
+    
     //找出特定字符在整个字符串中的位置
     //todo  用户名为特殊字符时，算不出redRange
     if (!model.username.length) {
         model.username = @"_";
     }
     NSRange redRange = NSMakeRange([[textAttri string] rangeOfString:model.username].location, [[textAttri string] rangeOfString:model.username].length+1);
-//    NSLog(@"是哪里昵称长度%@",NSStringFromRange(redRange));
+    //    NSLog(@"是哪里昵称长度%@",NSStringFromRange(redRange));
     //修改特定字符的颜色
     //userName时特定表情时会崩溃  redRange会显示不确定的大小
     [textAttri addAttribute:NSForegroundColorAttributeName value:textColor range:redRange];
@@ -826,17 +846,17 @@
         [rangeArr addObject:[self rangesOfString:str inString:subStr]];
     }
     return rangeArr;
-//    UIFont *font = [UIFont systemFontOfSize:FontSize_28];
-//    NSMutableAttributedString *attributedText;
-//    attributedText=[[NSMutableAttributedString alloc]initWithString:subStr attributes:@{NSFontAttributeName :font}];
-//    for(NSValue *value in rangeArr) {
-//        NSInteger index=[rangeArr indexOfObject:value];
-//        NSRange range=[value rangeValue];
-//        [attributedText addAttribute:NSLinkAttributeName value:[NSURL URLWithString:[arr objectAtIndex:index]] range:range];
-//        [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:range];
-//
-//    }
-//    return attributedText;
+    //    UIFont *font = [UIFont systemFontOfSize:FontSize_28];
+    //    NSMutableAttributedString *attributedText;
+    //    attributedText=[[NSMutableAttributedString alloc]initWithString:subStr attributes:@{NSFontAttributeName :font}];
+    //    for(NSValue *value in rangeArr) {
+    //        NSInteger index=[rangeArr indexOfObject:value];
+    //        NSRange range=[value rangeValue];
+    //        [attributedText addAttribute:NSLinkAttributeName value:[NSURL URLWithString:[arr objectAtIndex:index]] range:range];
+    //        [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:range];
+    //
+    //    }
+    //    return attributedText;
 }
 
 //获取查找字符串在母串中的NSRange

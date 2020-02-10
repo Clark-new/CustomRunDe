@@ -261,8 +261,12 @@
         [_segment setWidth:self.segment.frame.size.width/3 forSegmentAtIndex:1];
         [_segment setWidth:self.segment.frame.size.width/3 forSegmentAtIndex:2];
 //        [_segment setWidth:docWidth forSegmentAtIndex:3];
-        _segment.selectedSegmentIndex = 0;
-        _shadowView.frame = CGRectMake([self.segment widthForSegmentAtIndex:0]/2 - 12.5, shadowViewY, 25, 3);
+        if (self.ischange == YES) {
+            _segment.selectedSegmentIndex = 1;
+        } else {
+            _segment.selectedSegmentIndex = 0;
+            _shadowView.frame = CGRectMake([self.segment widthForSegmentAtIndex:0]/2 - 12.5, shadowViewY, 25, 3);
+        }
         
         /*  如果文档在下，隐藏切换按钮   */
         if (!_isSmallDocView) {

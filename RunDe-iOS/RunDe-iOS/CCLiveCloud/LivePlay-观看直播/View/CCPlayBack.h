@@ -12,6 +12,9 @@
 #import "CCDocView.h"//文档视图
 #import "CCSDK/RequestDataPlayBack.h"//sdk
 #import "CCSDK/SaveLogUtil.h"//日志
+//#ifdef LockView
+#import "CCLockView.h"//锁屏
+//#endif
 NS_ASSUME_NONNULL_BEGIN
 @protocol CCPlayBackDelegate <NSObject>
 @optional
@@ -72,7 +75,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy) void(^changeRate)(float rate);//改变播放器速率回调
 @property (nonatomic,copy) void(^pausePlayer)(BOOL pause);//暂停播放器回调
 @property (nonatomic,copy) void(^changePlayBack)(NSInteger btnTag);//横竖屏
-
+//#ifdef LockView
+@property (nonatomic,strong)CCLockView                  * lockView;//锁屏视图
 
 
 

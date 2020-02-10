@@ -37,7 +37,6 @@ typedef void(^ChangeProgress)(int time);
  @return self
  */
 -(instancetype)initWithRoomName:(NSString *)roomName duration:(int)duration;
-
 /**
  更新锁屏信息
  */

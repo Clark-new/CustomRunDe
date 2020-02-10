@@ -29,6 +29,17 @@
 #import "Reachability.h"
 #import "CCPublicInteractionView.h"
 #import "CCGiftRewardPopView.h"
+//#ifdef LockView
+#import "CCLockView.h"//锁屏界面
+//#endif
+/*
+*******************************************************
+*      去除锁屏界面功能步骤如下：                          *
+*  1。command+F搜索   #ifdef LockView                  *
+*                                                     *
+*  2.删除 #ifdef LockView 至 #endif之间的代码            *
+*******************************************************
+*/
 
 #import "CCPlayBackController.h"
 #import "CCPunchView.h"
@@ -86,11 +97,15 @@
 @property (nonatomic,strong)UIView                   *oncePlayerView;//临时playerView(双击ppt进入横屏调用)
 @property (nonatomic,strong)UILabel                  *label;
 @property (nonatomic,strong)MPVolumeView               *volumeView;
-@property (nonatomic,assign)CGFloat    jjjj;
 
 @property(nonatomic,strong)CCGiftRewardPopView * giftView;//礼物view
 @property(nonatomic,strong)CCGiftRewardPopView * rewardView;//打赏view
 @property (nonatomic,assign)BOOL                     changeGift;//换行显示打赏和礼物
+
+//#ifdef LockView
+#pragma make - 锁屏界面
+@property (nonatomic,strong)CCLockView               * lockView;//锁屏视图
+//#endif LockView
 
 
 @end
@@ -123,7 +138,7 @@
 //    [self giftView];
 //    [self rewardView];
 
-    
+
 //    UIButton *btn = [[UIButton alloc] init];
 //    [btn setBackgroundColor:[UIColor redColor]];
 //    [self.view addSubview:btn];
@@ -396,6 +411,10 @@
     //移除聊天
     [self.contentView removeChatView];
     [_announcementView removeFromSuperview];
+    
+    [self.giftView stopAnimate];
+    [self.rewardView stopAnimate];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)timerfunc {
@@ -1032,13 +1051,17 @@
  APP将要进入后台
  */
 - (void)appWillEnterBackgroundNotification {
-
+    //#ifdef LockView
+        if (_pauseInBackGround == NO) {
+            [_lockView updateLockView];
+        }
+    //#endif
 }
 /**
  APP将要进入前台
  */
 - (void)appWillEnterForegroundNotification {
-    if (_requestData.ijkPlayer.playbackState == IJKMPMoviePlaybackStatePaused) {
+    if (_requestData.ijkPlayer.playbackState == IJKMPMoviePlaybackStatePaused && self.playerView.pauseButton.selected == NO) {
         [_requestData.ijkPlayer play];
     }
 }
@@ -1073,6 +1096,39 @@
         case IJKMPMoviePlaybackStatePlaying:{
             [_playerView.loadingView removeFromSuperview];
             [[SaveLogUtil sharedInstance] saveLog:@"" action:SAVELOG_ALERT];
+            //#ifdef LockView
+                        if (_pauseInBackGround == NO) {//添加锁屏视图
+                            if (!_lockView) {
+                                _lockView = [[CCLockView alloc] initWithRoomName:_roomName duration:_requestData.ijkPlayer.duration];
+                                /*     播放/暂停回调     */
+                                WS(weakSelf)
+                                _lockView.pauseCallBack = ^(BOOL pause) {
+//                                    weakSelf.playerView.pauseButton.selected = pause;
+
+                                    if (pause) {
+//                                        [weakSelf.playerView stopTimer];
+//                                        [weakSelf.requestDataPlayBack.ijkPlayer pause];
+                                        weakSelf.playerView.pauseButton.selected = YES;
+                                        weakSelf.playerView.centerButton.selected = YES;
+                                        NSLog(@"走了这里");
+                                    }else{
+                                        weakSelf.playerView.pauseButton.selected = NO;
+                                        weakSelf.playerView.centerButton.selected = NO;
+//                                        [weakSelf.playerView startTimer];
+//                                        [weakSelf.requestDataPlayBack.ijkPlayer play];
+                                        NSLog(@"走了那里");
+
+                                    }
+                                    [weakSelf pauseButtonClicked:pause];
+                                };
+//                                [self.view addSubview:_lockView];
+                                [[UIApplication sharedApplication].keyWindow addSubview:_lockView];
+
+                            }else{
+                                [_lockView updateLockView];
+                            }
+                        }
+            //#endif
             break;
         }
         case IJKMPMoviePlaybackStatePaused:{
@@ -1125,11 +1181,14 @@
     [APPDelegate.window addSubview:_alertView];
 }
 -(void)addRunDeBanAlertView:(NSInteger)mode{
-    CCAlertView *alertView = [[CCAlertView alloc] initRunDeWithAlertTitle:@"" mode:mode];
-    [APPDelegate.window addSubview:alertView];
+    if (_alertView != nil) {
+        [_alertView removeFromSuperview];
+    }
+    _alertView = [[CCAlertView alloc] initRunDeWithAlertTitle:@"" mode:mode];
+    [APPDelegate.window addSubview:_alertView];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [alertView removeFromSuperview];
+        [_alertView removeFromSuperview];
     });
 }
 -(void)addAnnouncementAlertView:(NSString *)str{
@@ -1323,6 +1382,7 @@
          */
         [self stopTimer];
         [self.requestData requestCancel];
+        [self.lockView removeFromSuperview];
         self.requestData = nil;
         [self.playerView.smallVideoView removeFromSuperview];
         self.contentView.chatView.hidden = YES;
@@ -1334,12 +1394,17 @@
         self.playerView1.changePlayBack = ^(NSInteger btnTag) {
             [weakSelf changePlayBack:btnTag];
         };
+        self.playerView1.exitCallBack = ^{
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+
+        };
         [self.playerView1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.view);
             make.height.mas_equalTo(SCREEN_WIDTH *0.5625);
             make.top.equalTo(self.view).offset(SCREEN_STATUS);
         }];
     } else {//回放切直播
+        [self.playerView1.lockView removeFromSuperview];
         [self.playerView1 playBackRequestCancel];
         [self.playerView1.smallVideoView removeFromSuperview];
         [self.playerView1 removeFromSuperview];
@@ -1355,9 +1420,6 @@
         [self addObserver];
         
     }
-    
-   
-    
 
 }
 //竖屏模式下点击空白退出键盘

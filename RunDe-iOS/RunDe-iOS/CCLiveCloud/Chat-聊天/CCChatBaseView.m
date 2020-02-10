@@ -85,7 +85,17 @@
             //只看老师
             weakSelf.onlyTeacher = isSelect;
             [weakSelf.publicTableView reloadData];
-            [weakSelf.publicTableView setContentOffset:CGPointMake(0, weakSelf.publicTableView.contentSize.height -weakSelf.publicTableView.bounds.size.height) animated:YES];
+            
+            if (weakSelf.onlyTeacher) {
+                if (weakSelf.teacherChatArray.count > 0) {
+                    [weakSelf.publicTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.teacherChatArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+                }
+            }else{
+                if (weakSelf.publicChatArray.count > 0) {
+                    [weakSelf.publicTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.publicChatArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+                }
+            }
+//            [weakSelf.publicTableView setContentOffset:CGPointMake(0, weakSelf.publicTableView.contentSize.height -weakSelf.publicTableView.bounds.size.height) animated:YES];
 
         };
         

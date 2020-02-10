@@ -20,7 +20,6 @@
 		04C879652355CD2F007F54BB /* CCLiveFuncView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C879642355CD2F007F54BB /* CCLiveFuncView.m */; };
 		4B06A0F1238E1E5500B8F267 /* CCPunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B06A0ED238E1E5500B8F267 /* CCPunchView.m */; };
 		4B06A0F2238E1E5500B8F267 /* CCAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B06A0EE238E1E5500B8F267 /* CCAnimationView.m */; };
-		4B06A0F4238E1E7500B8F267 /* CCBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B06A0F3238E1E7500B8F267 /* CCBundle.bundle */; };
 		4B1AF652237B9FA400997C99 /* PPTextBackedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1AF62F237B9FA200997C99 /* PPTextBackedString.m */; };
 		4B1AF653237B9FA400997C99 /* UIButton+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1AF630237B9FA200997C99 /* UIButton+PPAddition.m */; };
 		4B1AF654237B9FA400997C99 /* NSString+PPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1AF631237B9FA200997C99 /* NSString+PPAddition.m */; };
@@ -42,14 +41,6 @@
 		4B297A132356F8F400A5300B /* CCLiveDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B297A122356F8F400A5300B /* CCLiveDirectory.m */; };
 		4B3D61E6236A8B430053AC52 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3D61E3236A8B420053AC52 /* Reachability.m */; };
 		4B3D61FD2373C9990053AC52 /* DWDrmServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3D61F72373C9980053AC52 /* DWDrmServer.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		4B3D62162373CFAC0053AC52 /* CCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3D62072373CF030053AC52 /* CCSDK.framework */; };
-		4B3D62172373CFAC0053AC52 /* DWDrmServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3D62082373CF030053AC52 /* DWDrmServer.framework */; };
-		4B3D62182373CFAC0053AC52 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3D62052373CF030053AC52 /* IJKMediaFramework.framework */; };
-		4B3D62192373CFAC0053AC52 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3D62042373CF030053AC52 /* WebRTC.framework */; };
-		4B3D621A2373CFE20053AC52 /* CCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3D62072373CF030053AC52 /* CCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4B3D621B2373CFE20053AC52 /* DWDrmServer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3D62082373CF030053AC52 /* DWDrmServer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4B3D621C2373CFE20053AC52 /* IJKMediaFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3D62052373CF030053AC52 /* IJKMediaFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4B3D621D2373CFE20053AC52 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3D62042373CF030053AC52 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B436D95235FF4A900B2D2A8 /* CCPlayBack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B436D94235FF4A900B2D2A8 /* CCPlayBack.m */; };
 		5202E5C3219D22C100C13EF9 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5202E5C1219D22C100C13EF9 /* LoadingView.m */; };
 		5202E5C6219D233100C13EF9 /* UITouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5202E5C4219D233000C13EF9 /* UITouchView.m */; };
@@ -193,10 +184,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4B3D621A2373CFE20053AC52 /* CCSDK.framework in Embed Frameworks */,
-				4B3D621B2373CFE20053AC52 /* DWDrmServer.framework in Embed Frameworks */,
-				4B3D621C2373CFE20053AC52 /* IJKMediaFramework.framework in Embed Frameworks */,
-				4B3D621D2373CFE20053AC52 /* WebRTC.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,7 +228,6 @@
 		4B06A0EE238E1E5500B8F267 /* CCAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAnimationView.m; sourceTree = "<group>"; };
 		4B06A0EF238E1E5500B8F267 /* CCPunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPunchView.h; sourceTree = "<group>"; };
 		4B06A0F0238E1E5500B8F267 /* CCAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimationView.h; sourceTree = "<group>"; };
-		4B06A0F3238E1E7500B8F267 /* CCBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CCBundle.bundle; sourceTree = "<group>"; };
 		4B1AF62E237B9FA200997C99 /* PPStickerTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPStickerTextView.h; sourceTree = "<group>"; };
 		4B1AF62F237B9FA200997C99 /* PPTextBackedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPTextBackedString.m; sourceTree = "<group>"; };
 		4B1AF630237B9FA200997C99 /* UIButton+PPAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PPAddition.m"; sourceTree = "<group>"; };
@@ -286,10 +272,6 @@
 		4B3D61F62373C9980053AC52 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IJKMediaFramework.framework; path = "CCLiveCloud/Live_iOS_Play_SDK(有连麦)/IJKMediaFramework.framework"; sourceTree = "<group>"; };
 		4B3D61F72373C9980053AC52 /* DWDrmServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DWDrmServer.framework; path = "CCLiveCloud/Live_iOS_Play_SDK(有连麦)/DWDrmServer.framework"; sourceTree = "<group>"; };
 		4B3D61F82373C9980053AC52 /* CCSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CCSDK.framework; path = "CCLiveCloud/Live_iOS_Play_SDK(有连麦)/CCSDK.framework"; sourceTree = "<group>"; };
-		4B3D62042373CF030053AC52 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
-		4B3D62052373CF030053AC52 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
-		4B3D62072373CF030053AC52 /* CCSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CCSDK.framework; sourceTree = "<group>"; };
-		4B3D62082373CF030053AC52 /* DWDrmServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DWDrmServer.framework; sourceTree = "<group>"; };
 		4B436D93235FF4A900B2D2A8 /* CCPlayBack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCPlayBack.h; sourceTree = "<group>"; };
 		4B436D94235FF4A900B2D2A8 /* CCPlayBack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCPlayBack.m; sourceTree = "<group>"; };
 		5202E5C1219D22C100C13EF9 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
@@ -519,10 +501,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B3D62162373CFAC0053AC52 /* CCSDK.framework in Frameworks */,
-				4B3D62172373CFAC0053AC52 /* DWDrmServer.framework in Frameworks */,
-				4B3D62182373CFAC0053AC52 /* IJKMediaFramework.framework in Frameworks */,
-				4B3D62192373CFAC0053AC52 /* WebRTC.framework in Frameworks */,
 				4B3D61FD2373C9990053AC52 /* DWDrmServer.framework in Frameworks */,
 				528EA207234D782A00E8BD7D /* Accelerate.framework in Frameworks */,
 				528EA205234D781B00E8BD7D /* libc++.tbd in Frameworks */,
@@ -640,18 +618,6 @@
 			path = "LiveDirectory-直播目录";
 			sourceTree = "<group>";
 		};
-		4B3D62012373CEC50053AC52 /* CCSDK */ = {
-			isa = PBXGroup;
-			children = (
-				4B06A0F3238E1E7500B8F267 /* CCBundle.bundle */,
-				4B3D62072373CF030053AC52 /* CCSDK.framework */,
-				4B3D62082373CF030053AC52 /* DWDrmServer.framework */,
-				4B3D62052373CF030053AC52 /* IJKMediaFramework.framework */,
-				4B3D62042373CF030053AC52 /* WebRTC.framework */,
-			);
-			path = CCSDK;
-			sourceTree = "<group>";
-		};
 		4EB56FFF876AA38305857105 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -748,7 +714,6 @@
 			isa = PBXGroup;
 			children = (
 				4B06A0EC238E1E5500B8F267 /* Punch-打卡 */,
-				4B3D62012373CEC50053AC52 /* CCSDK */,
 				04C879622355CCBF007F54BB /* 药店大学功能View */,
 				4B297A102356F83B00A5300B /* LiveDirectory-直播目录 */,
 				5229E3FB2181602D001F6169 /* BASE */,
@@ -1212,6 +1177,7 @@
 				522F4EE4217D607A001B078F /* Embed Frameworks */,
 				FB17F8297A30151FB0618209 /* [CP] Embed Pods Frameworks */,
 				52543F0A22391216002FAFF4 /* Embed PlugIns */,
+				7A8F8391E8BEA7A1D3912062 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1316,7 +1282,6 @@
 				70E04F61228517DD00A735FC /* chaoren_left@2x.png in Resources */,
 				529D538B2179750D0093F724 /* Assets.xcassets in Resources */,
 				70480D57223A4D8C00368084 /* gift_loading_gif@3x.gif in Resources */,
-				4B06A0F4238E1E7500B8F267 /* CCBundle.bundle in Resources */,
 				4B1AF661237B9FA400997C99 /* Emotion.bundle in Resources */,
 				4B1AF655237B9FA400997C99 /* Emotions.plist in Resources */,
 				70E04F5F228517DD00A735FC /* noble_background_image@2x.png in Resources */,
@@ -1356,6 +1321,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A8F8391E8BEA7A1D3912062 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CCLiveCloud/Pods-CCLiveCloud-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CCLiveCloud/Pods-CCLiveCloud-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CCLiveCloud/Pods-CCLiveCloud-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FB17F8297A30151FB0618209 /* [CP] Embed Pods Frameworks */ = {
@@ -1689,10 +1671,6 @@
 					"-framework",
 					"\"AFNetworking\"",
 					"-framework",
-					"\"Bugly\"",
-					"-framework",
-					"\"MBProgressHUD\"",
-					"-framework",
 					"\"MJExtension\"",
 					"-framework",
 					"\"Masonry\"",
@@ -1703,7 +1681,7 @@
 					"-framework",
 					"\"SystemConfiguration\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.CCLiveCloud;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.CCLiveCloud.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1744,10 +1722,6 @@
 					"-framework",
 					"\"AFNetworking\"",
 					"-framework",
-					"\"Bugly\"",
-					"-framework",
-					"\"MBProgressHUD\"",
-					"-framework",
 					"\"MJExtension\"",
 					"-framework",
 					"\"Masonry\"",
@@ -1758,7 +1732,7 @@
 					"-framework",
 					"\"SystemConfiguration\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.CCLiveCloud;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.CCLiveCloud.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;

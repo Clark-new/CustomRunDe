@@ -17,6 +17,8 @@
 @property(nonatomic,assign)CGRect                       keyboardRect;//键盘尺寸
 @property(nonatomic,assign)BOOL                         keyboardHidden;//是否隐藏键盘
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic,copy)NSAttributedString *attributedText;
+@property(nonatomic) NSRange selectedRange;
 
 //默认样式
 @property(nonatomic,strong)UIButton * courseButton;
@@ -246,6 +248,7 @@
         return;
     }
 
+
     UITextRange *markedTextRange = [self.textView markedTextRange];
     UITextPosition *position = [self.textView positionFromPosition:markedTextRange.start offset:0];
     if (position) {
@@ -266,9 +269,23 @@
     NSUInteger offset = self.textView.attributedText.length - attributedComment.length;
     self.textView.attributedText = attributedComment;
     self.textView.selectedRange = NSMakeRange(selectedRange.location - offset, 0);
+    self.attributedText = attributedComment;
+    self.selectedRange = NSMakeRange(selectedRange.location - offset, 0);
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
+    if (self.plainText.length>300) {
+        [_informationView removeFromSuperview];
+           _informationView = [[InformationShowView alloc] initWithLabel:ALERT_INPUTLIMITATION];
+           [APPDelegate.window addSubview:_informationView];
+           [_informationView mas_makeConstraints:^(MASConstraintMaker *make) {
+               make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 200, 0));
+           }];
+           [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(informationViewRemove) userInfo:nil repeats:NO];
+        self.textView.attributedText = self.attributedText;
+        self.textView.selectedRange = self.selectedRange;
+        return;
+    }
     [self refreshTextUI];
 
 }

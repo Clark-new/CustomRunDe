@@ -42,8 +42,7 @@
 @property (nonatomic, assign)BOOL                       isSmallDocView;//是否是文档小窗模式
 @property (nonatomic, strong)CCBarrage                  *barrageView;//弹幕
 @property (nonatomic, strong)UIButton                   *shareButton;//分享
-@property (nonatomic, strong)UIButton                   *pauseButton;//底部暂停播放
-@property (nonatomic, strong)UIButton                   *centerButton;//屏幕中间暂停播放
+
 
 @end
 
@@ -435,7 +434,8 @@
     }];
 
     //初始化弹幕
-    self.barrageView = [[CCBarrage alloc] initWithVideoView:self barrageStyle:NomalBarrageStyle];
+    self.barrageView = [[CCBarrage alloc] initWithVideoView:self barrageStyle:NomalBarrageStyle ReferenceView:self.bottomShadowView];
+//    self.barrageView = [[CCBarrage alloc] initWithVideoView:self barrageStyle:NomalBarrageStyle];
     //非wifi
     self.unWifiView = [[UIView alloc] initWithFrame:CGRectZero];
     self.unWifiView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0];

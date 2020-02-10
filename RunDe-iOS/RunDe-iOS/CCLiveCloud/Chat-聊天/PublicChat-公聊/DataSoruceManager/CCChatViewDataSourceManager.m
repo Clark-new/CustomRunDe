@@ -371,7 +371,9 @@
     if (!model.username.length) {
         model.username = @"_";
     }
-    float textMaxWidth = CCGetRealFromPt(438);
+//    float textMaxWidth = CCGetRealFromPt(438);
+    float textMaxWidth = SCREEN_WIDTH - (CCGetRealFromPt(30) + CCGetRealFromPt(20) + 40);
+
     NSString * textAttr = [NSString stringWithFormat:@"%@:%@",model.username,model.msg];
     NSMutableAttributedString *textAttri = [Utility emotionStrWithString:textAttr y:-8];
     [textAttri addAttribute:NSForegroundColorAttributeName value:CCRGBColor(51, 51, 51) range:NSMakeRange(0, textAttri.length)];

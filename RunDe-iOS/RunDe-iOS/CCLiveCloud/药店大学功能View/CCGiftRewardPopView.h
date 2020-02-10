@@ -29,6 +29,8 @@ typedef NS_ENUM(NSUInteger, CCGiftRewardPopViewStyle) {
 
 -(void)insertAnimate:(NSDictionary *)animateDict;
 
+-(void)stopAnimate;
+
 @end
 
 NS_ASSUME_NONNULL_END

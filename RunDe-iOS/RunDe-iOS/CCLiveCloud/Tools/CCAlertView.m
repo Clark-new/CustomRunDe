@@ -192,7 +192,6 @@
          self.titleimageView.image = [UIImage imageNamed:@"Relieve"];
         self.titleLabel.text = @"解除全体禁言";
         label.text = @"讲师已解除全体禁言";
-
     }
     
     //添加提示文字
@@ -208,7 +207,7 @@
         make.centerX.equalTo(self.alertBgView);
         make.bottom.equalTo(self.alertBgView.mas_bottom).offset(-20);
     }];
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:@"讲师已开启全体禁言" attributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFang SC" size: 15],NSForegroundColorAttributeName: [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0]}];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:label.text attributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFang SC" size: 15],NSForegroundColorAttributeName: [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0]}];
 
     label.attributedText = string;
 

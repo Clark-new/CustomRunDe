@@ -60,6 +60,7 @@
 
 
 -(void)dealloc{
+    NSLog(@"移除锁屏");
     [self stopTimer];
     [self resignFirstResponder];
     [[UIApplication sharedApplication]endReceivingRemoteControlEvents];
@@ -79,6 +80,7 @@
     //    [info setObject:@"专辑作者" forKey:MPMediaItemPropertyAlbumArtist];//专辑作者
     [info setObject:[[MPMediaItemArtwork alloc]initWithImage:[UIImage imageNamed:@"LockIcon"]] forKey:MPMediaItemPropertyArtwork];//显示的图片
     [info setObject:[NSNumber numberWithDouble:_duration] forKey:MPMediaItemPropertyPlaybackDuration];//总时长
+//    NSLog(@"剩余时长%d",_duration);
 //    [info setObject:[NSNumber numberWithDouble:0] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];//当前播放时间
     [info setObject:[NSNumber numberWithFloat:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];//播放速率
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:info];
@@ -93,7 +95,7 @@
     NSMutableDictionary *info = [[[MPNowPlayingInfoCenter defaultCenter]nowPlayingInfo] mutableCopy];
     [info setObject:[NSNumber numberWithDouble:currentDurtion] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:info];
-//    NSLog(@"当前播放进度:%lf", currentDurtion);
+    NSLog(@"当前播放进度:%@", info);
 }
 #pragma mark - 更新当前回放速率
 -(void)updatePlayBackRate:(float)rate{
@@ -114,7 +116,7 @@
     
     NSMutableDictionary *info = [[[MPNowPlayingInfoCenter defaultCenter]nowPlayingInfo] mutableCopy];
     if (pause) {
-        [info setObject:[NSNumber numberWithFloat:0.00001] forKey:MPNowPlayingInfoPropertyPlaybackRate];
+        [info setObject:[NSNumber numberWithFloat:0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
     }else
     {
         [info setObject:[NSNumber numberWithFloat:1.0] forKey:MPNowPlayingInfoPropertyPlaybackRate];
@@ -135,7 +137,7 @@
                 }
                 break;
             case UIEventSubtypeRemoteControlPause://暂停
-//                NSLog(@"暂停播放");
+                NSLog(@"前播放进暂停播放");
                 if (self.pauseCallBack) {
                     self.pauseCallBack(YES);
                     [self resumeAndPauseWhtherPause:YES];
