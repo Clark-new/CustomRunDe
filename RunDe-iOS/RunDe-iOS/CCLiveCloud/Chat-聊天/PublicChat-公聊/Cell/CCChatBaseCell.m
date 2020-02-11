@@ -277,7 +277,7 @@
             }];
         });
     }else{
-     
+        
 //        if(height < CCGetRealFromPt(80)) {//计算高度
         if (model.textSize.height < (_contentLabel.font.lineHeight * 2 + CCGetRealFromPt(36))) {
 

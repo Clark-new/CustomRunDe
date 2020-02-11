@@ -397,6 +397,11 @@
     } else {
         height = textSize.height + CCGetRealFromPt(18) * 2 + 20;
     };
+    
+    if ([model.fromuserrole isEqualToString:@"publisher"] ||[model.fromuserid isEqualToString:model.myViwerId]) {
+        textSize.width += 50;
+    }
+    
     model.textSize = textSize;
     return height;
 }
